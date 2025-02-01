@@ -29,10 +29,10 @@ namespace App {
       const enteredPeople = this.peopleInputEl.value;
 
       const titleValidatable: Validatable = { value: enteredTitle, required: true }
-      const descriptionValidatable: Validatable = { value: enteredTitle, required: true, minLength: 5 }
-      const peopleValidatable: Validatable = { value: enteredTitle, required: true, min: 1, max: 5 }
+      const descriptionValidatable: Validatable = { value: enteredDescription, required: true, minLength: 5 }
+      const peopleValidatable: Validatable = { value: +enteredPeople, required: true, min: 1, max: 5 }
 
-      if (!validation(titleValidatable) && !validation(descriptionValidatable) && !validation(peopleValidatable)) {
+      if (!validation(titleValidatable) || !validation(descriptionValidatable) || !validation(peopleValidatable)) {
         alert("invalid input");
         return;
       }
@@ -51,6 +51,9 @@ namespace App {
     private submitHandler(event: Event) {
       event.preventDefault();
       const userInput = this.gatherUserInput();
+
+      console.log(userInput);
+
 
       if (Array.isArray(userInput) == true) {
         const [title, desc, people] = userInput;
